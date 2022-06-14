@@ -19,8 +19,8 @@ public class Ejecutar_Juego {
             
             switch(Opcion_Menu){
                 case 1:
-                    System.out.println("**Login**");
                     crear.imprimir();
+                    System.out.println("**Login**");
                     System.out.print("Username: ");
                     nombre=lea.next();
                     System.out.println("Contraseña: ");
@@ -34,7 +34,7 @@ public class Ejecutar_Juego {
                     nombre=lea.next();
                     System.out.print("Contraseña: ");
                     contraseña=lea.next();
-                    
+                    crear.agregarplayer(nombre, contraseña, puntos);
                     
                     break;
                 case 3:

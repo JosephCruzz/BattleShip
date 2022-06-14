@@ -3,41 +3,38 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 public class database {
     
-    ArrayList<Integer> puntos=new ArrayList<Integer>();
+    ArrayList<Integer> Puntos=new ArrayList<Integer>();
     ArrayList<String> id=new ArrayList<String>();
-    ArrayList<String> password=new ArrayList<String>();
+    ArrayList<String> contra=new ArrayList<String>();
     String username="";
+    String password="";
+    int puntos=0;
     public database(String id,String password, int puntos){
-    String _id=id;
-    String _password=password;
-    int _puntos=puntos;
+    username=id;
+    this.password=password;
+    this.puntos=puntos;
     }
     
-    public void addID(String i){
-        id.add(i);
+    public String search(String id2){
+        for(String tmp:id){
+            if(tmp != null && tmp== id2){
+                return "";
+            }
+        }
+        return null;
+}
+    public boolean agregarplayer(String id2,String password,int puntos){
+        if (search(id2)==null){
+            id.add(id2);
+            contra.add(password);
+            Puntos.add(puntos);
+            return true;
     }
-    public void addPassword(String contra){
-        password.add(contra);
-    }
-    public void addPuntos(int punt){
-        puntos.add(punt);
-    }
-    
+         return false;
+        }
     public void imprimir(){
         for (int i=0;i<id.size();i++){
-        System.out.println("Player: "+id.get(i)+" Tiene: "+puntos.get(i)+" punto"+(puntos.get(i)==1?"":"s"));
-    }
-    }
-    public void search(String a,String contra,int punt){
-         boolean si = false;
-        for (int i=0;i<id.size();i++){
-            if (a.equals(id.get(i))){
-                si=false;
+            System.out.println("Nombre :"+id.get(i)+"Contrasena :"+contra.get(i)+"Puntos :"+Puntos.get(i));
         }
-            else{
-                si=true;
-            }
     }
-       
-}   
-    }
+   }
