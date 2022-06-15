@@ -10,22 +10,24 @@ public class Ejecutar_Juego {
         boolean Menu_Inicio=false,Bcrear=false;
         int Opcion_Menu=0;
         do{
-            System.out.println("**Menu Inicio**");
-            System.out.println("1-Login");
-            System.out.println("2-Crear player");
-            System.out.println("3-Salir");
-            System.out.print("Ingrese el numero de la opcion: ");
+            crear.imprimirMenuIn();
             Opcion_Menu=lea.nextInt();
             
             switch(Opcion_Menu){
                 case 1:
-                    crear.imprimir();
+                    crear.imprimirDatabase();
                     System.out.println("**Login**");
                     System.out.print("Username: ");
                     nombre=lea.next();
                     System.out.println("Contraseña: ");
                     contraseña=lea.next();
-                    
+                    crear.login(nombre, contraseña);
+                    crear.entrar(nombre,contraseña);
+                    //Menu principal
+                    if (crear.login(nombre, contraseña)==true){
+                        crear.imprimirMenuPrin();
+                        
+                    }
                     break;
                 case 2:
                     System.out.println("*************");
@@ -34,8 +36,7 @@ public class Ejecutar_Juego {
                     nombre=lea.next();
                     System.out.print("Contraseña: ");
                     contraseña=lea.next();
-                    crear.agregarplayer(nombre, contraseña, puntos);
-                    
+                    crear.agregarplayer(nombre, contraseña, puntos);                    
                     break;
                 case 3:
                     System.out.println("**Saliendo del juego**");
