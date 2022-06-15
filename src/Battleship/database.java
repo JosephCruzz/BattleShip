@@ -14,6 +14,8 @@ public class database {
     this.password=password;
     this.puntos=puntos;
     }
+    /*
+    
     
     public String search(String id2){
         for(String tmp:id){
@@ -23,14 +25,18 @@ public class database {
         }
         return null;
 }
+*/
     public boolean agregarplayer(String id2,String password,int puntos){
-        if (search(id2)==null){
+        for(String tmp:id){
+            if(tmp.equals(id2)){
+                return false;
+            }           
+        }        
             id.add(id2);
             contra.add(password);
             Puntos.add(puntos);
             return true;
-    }
-         return false;
+    
         }
     public void imprimir(){
         for (int i=0;i<id.size();i++){
