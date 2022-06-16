@@ -37,9 +37,9 @@ public class Ejecutar_Juego {
                         switch(Opcion_Prin){
                             case 1:
                                 System.out.println("--Inicio de Sesion para Player 2--");
-                                System.out.println("Username: ");
+                                System.out.print("Username: ");
                                 nombre2=lea.next();
-                                System.out.println("Password: ");
+                                System.out.print("Password: ");
                                 contraseña2=lea.next();
                                 crear.loginPlayer2(Player1, nombre2, contraseña2);
                                 if (crear.loginPlayer2(Player1, nombre2,contraseña2)==true){
