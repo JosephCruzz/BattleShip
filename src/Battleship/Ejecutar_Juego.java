@@ -10,7 +10,7 @@ public class Ejecutar_Juego {
         String Player2="";
         int puntos=0,respuesta=0,respuesta2=0,respuesta3=0;
         database crear=new database(nombre,contraseña,puntos);
-        boolean Menu_Inicio=false,Menu_prin=false;
+        boolean Menu_Inicio=false,Menu_prin=false,inicio=false;
         int Opcion_Menu=0,Opcion_Prin=0;
         
         //Menu Inicio
@@ -36,7 +36,8 @@ public class Ejecutar_Juego {
                         Opcion_Prin=lea.nextInt();
                         switch(Opcion_Prin){
                             case 1:
-                                System.out.println("--Inicio de Sesion para Player 2--");
+                                do{
+                                   System.out.println("--Inicio de Sesion para Player 2--");
                                 System.out.print("Username: ");
                                 nombre2=lea.next();
                                 System.out.print("Password: ");
@@ -48,7 +49,23 @@ public class Ejecutar_Juego {
                                     System.out.println("Player 2: "+Player2);
                                     System.out.println("Listos?");
                                     System.out.println("1-SI  2-NO");
+                                    System.out.println("--Si desea salir, presione 3--");
                                     respuesta=lea.nextInt();
+                                    switch(respuesta){
+                                        case 1:
+                                            System.out.println("Juego en construccion :v");
+                                            break;
+                                        case 2:
+                                            System.out.println("--Volviendo al Inicio de sesion de Player 2--");
+                                            break;
+                                        case 3:
+                                            System.out.println("--Volviendo al Menu Principal--");
+                                            inicio=true;
+                                            break;
+                                        default:
+                                            System.out.println("Selecciona 1, 2 o 3");
+                                            break;
+                                    }
                                 }
                                 else{
                                     System.out.println("Username o Password Incorrectos");
@@ -60,20 +77,13 @@ public class Ejecutar_Juego {
                                             System.out.println("-----------------");
                                             break;
                                         case 2:
-                                            System.out.println("Desea volver al Menu Principal?");   
-                                            System.out.println("1-SI   2-NO");
-                                            respuesta3=lea.nextInt();
-                                            switch(respuesta3){
-                                                case 1: 
-                                                    System.out.println("Estoy en el switch ");
-                                                    break;
-                                                case 2:
-                                                    System.out.println("--------------");
-                                                    break;
-                                            }
+                                            inicio=true;
+                                            System.out.println("Volviendo al Menu Principal");
                                             break;
                                     }
-                                }
+                                } 
+                                }while(!inicio);
+                                inicio=false;
                                 break;
                             case 2:
                                 crear.imprimirConf();
