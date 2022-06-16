@@ -76,7 +76,7 @@ public class database {
      
      public boolean loginPlayer2(String idPlayer1,String idPlayer2,String password2){
             for (int i=0;i<id.size();i++){
-                if (id.get(i).equals(idPlayer2)){
+                if (id.get(i).equals(idPlayer2)&&!id.get(i).equals(idPlayer1)){
                         if (contra.get(i).equals(password2)&&idPlayer1!=idPlayer2){
                             return true;
                         }
