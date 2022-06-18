@@ -8,9 +8,9 @@ public class Ejecutar_Juego {
         String Player1="";
         String contraseñaPlayer1="";
         String Player2="";
-        int puntos=0,respuesta=0,respuesta2=0,respuesta3=0;
+        int puntos=0,respuesta=0,respuesta2=0,respuesta3=0,perfil=0;
         database crear=new database(nombre,contraseña,puntos);
-        boolean Menu_Inicio=false,Menu_prin=false,inicio=false;
+        boolean Menu_Inicio=false,Menu_prin=false,inicio=false,perfilB=false,eliminar=false;
         int Opcion_Menu=0,Opcion_Prin=0;
         
         //Menu Inicio
@@ -92,7 +92,38 @@ public class Ejecutar_Juego {
                                 crear.imprimirRep();
                                 break;
                             case 4:
+                                do{
                                 crear.imprimirPerf();
+                                perfil=lea.nextInt();
+                                switch(perfil){
+                                    case 1:
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                      crear.eliminarCuenta(eliminar);
+                                        break;
+                                    case 4:
+                                         System.out.println("--Volviendo al Menu Principal--");
+                                        perfilB=true;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                }while(!perfilB);
+                                switch(perfil){
+                                    case 1:
+                                        crear.imprimirPlayer1();
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                    case 4:
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                             case 5:
                                 System.out.println("--Volviendo al Menu de Inicio--");
