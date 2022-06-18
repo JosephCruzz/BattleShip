@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class Ejecutar_Juego {
     public static void main(String[] args) {
         Scanner lea=new Scanner(System.in);
-         
         String nombre="",contraseña="",nombre2="",contraseña2="";
         String Player1="";
         String contraseñaPlayer1="";
         String Player2="";
+        String nuevonombre="",nuevopassword="";
         int puntos=0,respuesta=0,respuesta2=0,respuesta3=0,perfil=0;
         database crear=new database(nombre,contraseña,puntos);
-        boolean Menu_Inicio=false,Menu_prin=false,inicio=false,perfilB=false,eliminar=false;
+        boolean Menu_Inicio=false,Menu_prin=false,inicio=false,perfilB=false,eliminar=false,salir=false;
         int Opcion_Menu=0,Opcion_Prin=0;
         
         //Menu Inicio
@@ -22,8 +22,10 @@ public class Ejecutar_Juego {
                     crear.imprimirDatabase();
                     System.out.println("**Login**");
                     System.out.print("Username: ");
+                    lea.useDelimiter("\n");
                     nombre=lea.next();
                     System.out.print("Password: ");
+                    lea.useDelimiter("\n");
                     contraseña=lea.next();
                     crear.login(nombre, contraseña);
                     crear.entrar(nombre,contraseña);
@@ -39,8 +41,10 @@ public class Ejecutar_Juego {
                                 do{
                                    System.out.println("--Inicio de Sesion para Player 2--");
                                 System.out.print("Username: ");
+                                lea.useDelimiter("\n");
                                 nombre2=lea.next();
                                 System.out.print("Password: ");
+                                lea.useDelimiter("\n");
                                 contraseña2=lea.next();
                                 crear.loginPlayer2(Player1, nombre2, contraseña2);
                                 if (crear.loginPlayer2(Player1, nombre2,contraseña2)==true){
@@ -96,12 +100,89 @@ public class Ejecutar_Juego {
                                 crear.imprimirPerf();
                                 perfil=lea.nextInt();
                                 switch(perfil){
+                                    //Ver datos
                                     case 1:
+                                        crear.imprimirPlayer1(Player1);
                                         break;
+                                        //Modificar cuenta
                                     case 2:
+                                        do{
+                                                                                 
+                                        crear.imprimirModificacion(Player1);
+                                        respuesta=lea.nextInt();
+                                        if (respuesta==1||respuesta==2||respuesta==3){
+                                            salir=true;
+                                        }
+                                        else {
+                                            System.out.println("--Opcion Invalida--");
+                                        }
+                                         }while (!salir);
+                                        salir=false;
+                                        switch(respuesta){
+                                            case 1:
+                                                do{
+                                                System.out.println("------------------");
+                                                System.out.print("Nuevo nombre: ");
+                                                lea.useDelimiter("\n");
+                                                nuevonombre=lea.next();
+                                                if(!nuevonombre.equals(Player1)){
+                                                    if (crear.modificarNombre(Player1, nuevonombre)==true){
+                                                        System.out.println("--Los cambios se han aplicado--");
+                                                        crear.modificarNombre(Player1, nuevonombre);
+                                                        Player1=nuevonombre;
+                                                        salir=true;
+                                                    }
+                                                    else{
+                                                        System.out.println("----ATENCION---");
+                                                        System.out.println("--NUEVO NOMBRE YA ESTA EN USO--");
+                                                    }
+                                                }
+                                                else {
+                                                    System.out.println("--Ha ingresado el mismo nombre-- \nTiene que ser uno nuevo");
+                                                }
+                                                }while(!salir);
+                                                salir=false;
+                                                break;
+                                            case 2:
+                                                System.out.println("-------------------------------");
+                                                System.out.print("Ingrese el nuevo password: ");
+                                                lea.useDelimiter("\n");
+                                                nuevopassword=lea.next();
+                                                crear.modificarPassword(Player1, nuevopassword);
+                                                break;
+                                            case 3:
+                                                System.out.println("--Volviendo al Menu de Perfil--");
+                                                
+                                                break;
+                                        }
                                         break;
+                                        //Eliminar cuenta
                                     case 3:
-                                      crear.eliminarCuenta(eliminar);
+                                        do{
+                                         System.out.println("--Eliminacion de cuenta--");
+                                         System.out.println("------------------------------------------");
+                                         System.out.println("Deseas eliminar tu cuenta permanentemente?");
+                                         System.out.println("1-SI  2-NO");
+                                         System.out.print("Opcion: ");
+                                         respuesta=lea.nextInt();
+                                         if (respuesta==1||respuesta==2){
+                                             salir=true;
+                                         }
+                                        }while(!salir);
+                                        salir=false;
+                                        switch(respuesta){
+                                             case 1:
+                                             eliminar=true;
+                                            crear.eliminarCuenta(eliminar,Player1);
+                                             System.out.println("--Volviendo al Menu de Inicio--");
+                                             perfilB=true;
+                                             Menu_prin=true;
+                                             eliminar=false;
+                                                 break;
+                                             case 2:
+                                           System.out.println("--Volviendo al Menu de Perfil--");
+                                                 break;
+                                         }
                                         break;
                                     case 4:
                                          System.out.println("--Volviendo al Menu Principal--");
@@ -111,19 +192,7 @@ public class Ejecutar_Juego {
                                         break;
                                 }
                                 }while(!perfilB);
-                                switch(perfil){
-                                    case 1:
-                                        crear.imprimirPlayer1();
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        break;
-                                    case 4:
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                perfilB=false;
                                 break;
                             case 5:
                                 System.out.println("--Volviendo al Menu de Inicio--");
@@ -134,21 +203,45 @@ public class Ejecutar_Juego {
                                 break;
                         }
                         }while(!Menu_prin);
-                        Menu_prin=false;
                     }
+                    Menu_prin=false;
                     break;
                 case 2:
                     System.out.println("*************");
                     System.out.println("Crear player");
                     System.out.print("Usuario: ");
+                    lea.useDelimiter("\n");
                     nombre=lea.next();
-                    System.out.print("Contraseña: ");
+                    System.out.print("Password: ");
+                    lea.useDelimiter("\n");
                     contraseña=lea.next();
                     crear.agregarplayer(nombre, contraseña, puntos);                    
                     break;
                 case 3:
-                    System.out.println("**Saliendo del juego**");
-                    Menu_Inicio=true;
+                    do{
+                        System.out.println("--------------------------------------------");
+                        System.out.println("Esta seguro que desea salir de Battleship?");
+                        System.out.println("1-SI   2-NO");
+                        System.out.println("Ingrese el numero de la opcion");
+                        System.out.print("Opcion: ");
+                        respuesta=lea.nextInt();
+                        if (respuesta==1||respuesta==2){
+                            salir=true;
+                        }
+                        else {
+                            System.out.println("--Opcion Invalida--");
+                        }
+                    }while(!salir);
+                    salir=false;
+                    switch(respuesta){
+                        case 1:
+                            System.out.println("**Saliendo de Battleship**");
+                            Menu_Inicio=true;
+                            break;
+                        case 2:
+                            System.out.println("--Volviendo al Menu de Inicio--");
+                            break;
+                    }
                     break;
                 default:
                     break;

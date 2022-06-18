@@ -30,22 +30,18 @@ public class database {
             System.out.println("Nombre :"+id.get(i)+" Password :"+contra.get(i)+" Puntos :"+Puntos.get(i));
         }
     }
-    public void imprimirPlayer1(){
+    public void imprimirPlayer1(String id2){
         for (int i=0;i<id.size();i++){
-            if(id.get(i).equals(username)){
-                System.out.println("Nombre :"+id.get(i)+" Puntos: "+Puntos.get(i));
+            if(id.get(i).equals(id2)){
+                System.out.println("--------------------------------");
+                System.out.println("Nombre :"+id.get(i)+"Password: "+contra.get(i)+" Puntos: "+Puntos.get(i));
             }
         }
     }
-    public void eliminarCuenta(boolean respuesta){
+    public void eliminarCuenta(boolean respuesta,String user){
+        if (respuesta==true){
         for (int i=0;i<id.size();i++){
-            if(id.get(i).equals(username)){
-                System.out.println("--Eliminacion de cuenta--");
-                System.out.println("Cuenta a eliminar: \nNombre :"+id.get(i)+" con "+Puntos.get(i)+ (Puntos.get(i)==0?" punto":" puntos"));
-                System.out.println("------------------------------------------");
-                System.out.println("Deseas eliminar tu cuenta permanentemente?");
-                System.out.println("1-SI  2-NO");
-                if (respuesta==true){
+            if(id.get(i).equals(user)){
                     id.remove(i);
                     contra.remove(i);
                     Puntos.remove(i);
@@ -57,6 +53,7 @@ public class database {
     
      public void imprimirMenuPrin(){
           System.out.println("--------------------------------");
+          System.out.println("----MENU PRINCIPAL----");
          System.out.println("1-Jugar Battleship");
          System.out.println("2-Configuracion");
          System.out.println("3-Reportes");
@@ -76,14 +73,14 @@ public class database {
           System.out.println("--------------------------------");
          System.out.println("1-Dificultad");
          System.out.println("2-Modo de Juego");
-         System.out.println("3-Volver al Menu");
+         System.out.println("3-Volver al Menu Principal");
          System.out.print("Ingrese el numero de la opcion: ");
      }
      public void imprimirRep(){
           System.out.println("--------------------------------");
          System.out.println("1-Descripcion de mis ultimos juegos");
          System.out.println("2-Ranking de Jugadores");
-         System.out.println("3-Volver al Menu");
+         System.out.println("3-Volver al Menu Principal");
          System.out.print("Ingrese el numero de la opcion: ");
      }
      public void imprimirPerf(){
@@ -91,7 +88,7 @@ public class database {
          System.out.println("1-Ver mis Datos");
          System.out.println("2-Modificar mis Datos");
          System.out.println("3-Eliminar mi cuenta");
-         System.out.println("4-Volver al Menu");
+         System.out.println("4-Volver al Menu Principal");
          System.out.print("Ingrese el numero de la opcion: ");
      }
      public boolean login(String id2,String password){        
@@ -101,8 +98,7 @@ public class database {
              }
          }  
          return false;
-     }
-     
+     }     
      public boolean loginPlayer2(String idPlayer1,String idPlayer2,String password2){
             for (int i=0;i<id.size();i++){
                 if (id.get(i).equals(idPlayer2)&&!id.get(i).equals(idPlayer1)){
@@ -115,7 +111,8 @@ public class database {
      }
      public boolean entrar(String id2,String password){
           if (login(id2,password)==true){
-              System.out.println("Bienvenido "+id2+" a Battleship");
+              System.out.println("---------------------------------");
+              System.out.println("Bienvenid@ "+id2+" a Battleship");
           return true;
           }
           System.out.println("Tu username o password son incorrectos");
@@ -129,4 +126,45 @@ public class database {
           System.out.println("Tu username o password son incorrectos");
           return false;
      }
+      public void imprimirModificacion (String user){
+          System.out.println("---Modificar Datos---");
+          System.out.println("Nombre actual :"+user);
+          for(int i=0;i<id.size();i++){
+              if (id.get(i).equals(user)){
+                  System.out.println("Password actual: "+contra.get(i));
+              }
+          }
+          System.out.println("------------------------------------------------");
+          System.out.println("Que datos le gustaria modificar en esta cuenta?");
+          System.out.println("1-Nombre  2-Password   3-Exit");
+      }
+      public boolean modificarNombre(String antiguo,String nuevo){
+          for (int i=0;i<id.size();i++){
+              if (id.get(i).equals(antiguo)){
+                  if (search(nuevo)==true){
+                  id.set(i, nuevo);
+                  return true;
+                   }
+              }
+          }
+          return false;
+      }
+      public boolean search(String user){
+          for(int i=0;i<id.size();i++){
+              if(id.get(i).equals(user)){
+                  return false;
+              }
+          }
+          return true;
+      }
+      public boolean modificarPassword(String user,String nuevoPassword){
+          for (int i=0;i<id.size();i++){
+              if (id.get(i).equals(user)){
+                  contra.set(i, nuevoPassword);
+                  System.out.println("--Los cambios se han realizado con exito--");
+                  return true;
+              }
+          }
+          return false;
+      }
    }
