@@ -1,4 +1,5 @@
 package Battleship;
+import java.io.IOException;
 import java.util.Scanner;
 public class Ejecutar_Juego {
     public static void main(String[] args) {
@@ -9,9 +10,21 @@ public class Ejecutar_Juego {
         String Player2="";
         String nuevonombre="",nuevopassword="";
         int puntos=0,respuesta=0,respuesta2=0,respuesta3=0,perfil=0;
+        int tableroLength=8;
+        String agua="~";
+        String portaaviones="PA";
+        String acorazado="AZ";
+        String submarino="SM";
+        String Destructor="DT";
+        String fallo="F";
+        String golpe="X";
+        int Modo=4;
         database crear=new database(nombre,contraseña,puntos);
+        Battleship battle=new Battleship(tableroLength,agua,portaaviones,acorazado,submarino,Destructor,fallo,golpe,Modo);
         boolean Menu_Inicio=false,Menu_prin=false,inicio=false,perfilB=false,eliminar=false,salir=false;
         int Opcion_Menu=0,Opcion_Prin=0;
+        boolean Tutorial=true;
+        String ModosJuego;
         
         //Menu Inicio
         do{
@@ -57,8 +70,48 @@ public class Ejecutar_Juego {
                                     respuesta=lea.nextInt();
                                     switch(respuesta){
                                         case 1:
-                                            System.out.println("Juego en construccion :v");
+                                            System.out.println("Juego en construccion :v ya no xd");
+                                            crear.TiposBarcos();
+                                            battle.mostrarTurnoActual(Player1,Player2);
+                                            int Modotmp=Modo;
+                                            battle.tipoBarquito(portaaviones, acorazado, submarino, Destructor);
+                                             
+                                            while (battle.tipoBarquito(portaaviones, acorazado, submarino, Destructor).equals(battle.tipoBarquito(portaaviones, acorazado, submarino, Destructor))){
+                                                if (battle.tipoBarquito(portaaviones, acorazado, submarino, Destructor).equals(battle.tipoBarquito(portaaviones, acorazado, submarino, Destructor))){
+                                             System.out.println("No puede elejir el mismo tipo de barco dos veces");
+                                                
+                                            
+                                                
+                                                }else {  }
+                                               
+                                            }
+                                                    
+                                           
+                                            
+                                            
+                                            
+                                             
+                                            String[][] tablero = battle.creartablero(tableroLength,agua,portaaviones,acorazado,submarino,Destructor,Modo);
+                                           
+                                            battle.imprimirTablero(tablero, agua,portaaviones,Tutorial);
+                                            int numeroBarquitosIndetectados=Modo;                                            
+                                            while(numeroBarquitosIndetectados>0){
+                                                battle.cambiaTurno();
+                                                battle.mostrarTurnoActual(Player1,Player2);
+                                                int [] adivinarCoordenadas = battle.coordenadasUsuario(tableroLength);
+                                                String actualizarLugar=battle.evaluaryTraerObjetivo(adivinarCoordenadas,tablero,portaaviones,agua,golpe,fallo);
+                                                if(actualizarLugar.equals(golpe)){
+                                                    numeroBarquitosIndetectados=-1;
+                                                }
+                                                tablero=battle.actualizarTablero(tablero, adivinarCoordenadas,actualizarLugar);
+                                                battle.imprimirTablero(tablero,agua,portaaviones,Tutorial);
+                                            }
+                                                System.out.println("Ganaste!");
+                                               
+                                            
+                                   
                                             break;
+                                             
                                         case 2:
                                             System.out.println("--Volviendo al Inicio de sesion de Player 2--");
                                             break;
@@ -90,7 +143,43 @@ public class Ejecutar_Juego {
                                 inicio=false;
                                 break;
                             case 2:
-                                crear.imprimirConf();
+                                System.out.println("Bienvenido a configuracion");
+                                 crear.imprimirConfig();
+                                 int ConfigMenu;
+                                 ConfigMenu=lea.nextInt();
+                                 switch (ConfigMenu){
+                                    case 1:
+                                        System.out.println("Aqui usted puede cambiar la dificultad");
+                                        System.out.println("Press enter to continue");
+                                         try{System.in.read();}
+                                         catch(IOException e){}
+                                         
+                                        battle.dificultad(Modo);
+                                        Modo=battle.dificultad(Modo);                                        
+                                             break;
+                                    case 2: 
+                                        System.out.println("--------------------------------------");
+                                        System.out.println("Modos de juego");
+                                        System.out.println("En el tutorial todos podran ver los barcos, en el modo de juego Arcade estaran ocultos.");
+                                        System.out.println("a) Tutorial -- b) Arcade");
+                                        System.out.println("Escriba cual la letra correspondiente del modo de juego desea: ");
+                                        System.out.println("Ejemplo : a");
+                                        ModosJuego=lea.next();
+                            switch (ModosJuego) {
+                                case "a":
+                                    System.out.println("Usted activo Tutorial");
+                                    Tutorial=true;
+                                    break;
+                                case "b":
+                                    System.out.println("Usted activo arcade");
+                                    Tutorial=false;
+                                    break;
+                                default:
+                                    System.out.println("Usted ha ingresado una letra incorrecta, escriba la correcta");
+                                    break;
+                            }
+
+                                            }
                                 break;
                             case 3:
                                 crear.imprimirRep();

@@ -69,7 +69,7 @@ public class database {
         System.out.println("3-Salir");
         System.out.print("Ingrese el numero de la opcion: ");
      }
-     public void imprimirConf(){
+     public void imprimirConfig(){
           System.out.println("--------------------------------");
          System.out.println("1-Dificultad");
          System.out.println("2-Modo de Juego");
@@ -91,6 +91,16 @@ public class database {
          System.out.println("4-Volver al Menu Principal");
          System.out.print("Ingrese el numero de la opcion: ");
      }
+     
+     public void TiposBarcos(){
+        System.out.println("""
+                           ----------------------------------------------------------------
+                           Portaaviones, 5 bombas necesarias para ser destruido, Codigo: PA
+                            Acorazado, 4 bombas para poder ser destruido, Codigo: AZ
+                            Submarino, 3 bombas para ser destruido, Codigo: SM
+                            Destructor, 2 bombas para ser destruido, Codigo: DT
+                           -----------------------------------------------------------------""");
+    }
      public boolean login(String id2,String password){        
              for (int i=0;i<id.size();i++){
              if (id.get(i).equals(id2)&&contra.get(i).equals(password)){                 
