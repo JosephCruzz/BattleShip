@@ -2,7 +2,6 @@ package Battleship;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Random;
 
 import java.util.Scanner;
 public class Battleship {
@@ -150,14 +149,14 @@ public class Battleship {
     }
     
      String tipoBarquito(String portaaviones,String acorazado,String submarino, String Destructor){
-        System.out.println("Que tipo de barco usted desea elejir?");
+        System.out.println("Que tipo de barco usted desea elejir? (");
         String tipoBarquitoUser;
         
         do{
            
         tipoBarquitoUser=new Scanner(System.in).next();
         tipoBarquitoUser=tipoBarquitoUser.toUpperCase();
-         if(!tipoBarquitoUser.equals("PA")||(!tipoBarquitoUser.equals("AZ"))||(!tipoBarquitoUser.equals("SM"))||(!tipoBarquitoUser.equals("DT"))){
+         if(tipoBarquitoUser.equals("PA")||(tipoBarquitoUser.equals("AZ"))||(tipoBarquitoUser.equals("SM"))||(tipoBarquitoUser.equals("DT"))){
              
          
             switch (tipoBarquitoUser) {  case "PA": return  portaaviones;
@@ -170,7 +169,7 @@ public class Battleship {
          }else{
              System.out.println("Usted elijio el mismo barco dos veces elija otro");
          }
-        }while (!tipoBarquitoUser.equals("PA")||(!tipoBarquitoUser.equals("AZ"))||(!tipoBarquitoUser.equals("SM"))||(!tipoBarquitoUser.equals("DT")));
+        }while (tipoBarquitoUser.equals("PA")||(tipoBarquitoUser.equals("AZ"))||(tipoBarquitoUser.equals("SM"))||(tipoBarquitoUser.equals("DT")));
         return portaaviones;
     }
     

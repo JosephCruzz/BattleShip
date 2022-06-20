@@ -165,6 +165,7 @@ public class Ejecutar_Juego {
                                         System.out.println("Escriba cual la letra correspondiente del modo de juego desea: ");
                                         System.out.println("Ejemplo : a");
                                         ModosJuego=lea.next();
+                                        ModosJuego=ModosJuego.toLowerCase();
                             switch (ModosJuego) {
                                 case "a":
                                     System.out.println("Usted activo Tutorial");
